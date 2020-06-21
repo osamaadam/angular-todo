@@ -48,26 +48,29 @@ router.post("/add", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-  const { user, todo }: { user: Auth; todo: TodoType } = req.body;
+  const { user, _id }: { user: Auth; _id: string } = req.body;
 
   if (!user) res.status(401).json("User not logged in!");
 
+  const todo = await Todo.findById(_id).exec();
+
   const updatedTodo = await Todo.findOneAndUpdate(
-    { _id: todo._id },
+    { _id },
     {
       $set: { completed: !todo.completed },
-    }
+    },
+    { new: true }
   ).exec();
 
   res.json({ todo: updatedTodo });
 });
 
 router.post("/delete", async (req, res) => {
-  const { user, todo }: { user: Auth; todo: TodoType } = req.body;
+  const { user, _id }: { user: Auth; _id: string } = req.body;
 
   if (!user) res.status(401).json("User not logged in!");
 
-  const deletedTodo = await Todo.findOneAndDelete({ _id: todo._id }).exec();
+  const deletedTodo = await Todo.findOneAndDelete({ _id }).exec();
 
   res.json({ todo: deletedTodo });
 });

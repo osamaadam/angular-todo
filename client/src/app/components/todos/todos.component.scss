@@ -1,0 +1,51 @@
+.todos-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.todos-input-section {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1em;
+  &__input {
+    flex: 5;
+    margin-right: 0.5em;
+  }
+  &__submit {
+    flex: 1;
+  }
+}
+
+.todo {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  &__item {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  &__container {
+    flex: 10;
+    font-size: 1.2em;
+    background-color: #fafafa;
+    border-width: 0;
+    padding: 1em;
+    margin-right: 0.5em;
+    border-radius: 0.5em;
+    border: 2px solid var(--primaryColor);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &--completed {
+      background-color: var(--success);
+    }
+  }
+  &__delete {
+    flex: 1;
+  }
+}

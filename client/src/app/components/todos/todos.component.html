@@ -1,9 +1,33 @@
-<div>
-  <input type="text" name="input-todo" [(ngModel)]="newTodo.msg" />
-  <button type="submit" class="button" (click)="addTodo()">add</button>
-  <ul *ngIf="todos">
-    <li *ngFor="let todo of todos" (click)="updateTodo(todo)">
-      {{ todo.msg }}
+<div class="todos-container card">
+  <section class="todos-input-section">
+    <input
+      type="text"
+      name="input-todo"
+      [(ngModel)]="newTodo.msg"
+      (keydown)="keyDownResponse($event)"
+      class="todos-input-section__input"
+    />
+    <button
+      type="submit"
+      class="button"
+      (click)="addTodo()"
+      class="todos-input-section__submit button"
+    >
+      add
+    </button>
+  </section>
+  <ul *ngIf="todos" class="todo">
+    <li *ngFor="let todo of todos" class="todo__item">
+      <button
+        class="todo__container"
+        [ngClass]="todo.completed && 'todo__container--completed'"
+        (click)="updateTodo(todo)"
+      >
+        {{ todo.msg }}
+      </button>
+      <button class="button todo__delete" (click)="deleteTodo(todo)">
+        delete
+      </button>
     </li>
   </ul>
 </div>

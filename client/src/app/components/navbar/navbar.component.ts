@@ -8,11 +8,17 @@ import { User } from "src/app/models/user";
 })
 export class NavbarComponent implements OnInit {
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const theme = localStorage.getItem("theme");
+    this.theme = theme === "light";
+    this.isLoginPage = window.location.pathname === "/login";
+  }
 
   @Input() user: User;
 
   theme: boolean;
+  isLoginPage: boolean;
+
   changeTheme() {
     const theme = this.theme ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", theme);

@@ -17,17 +17,19 @@ export class TodosComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) this.router.navigateByUrl("/login");
   }
-  todos: Todo[];
+  todos: Todo[] = [];
   newTodo: Partial<Todo> = {
     msg: "",
     completed: false,
   };
 
   addTodo() {
-    this.todosService.addTodo(this.newTodo.msg).subscribe(({ todo }) => {
-      this.todos = [...this.todos, todo];
-      console.log(this.todos);
-    });
+    if (this.newTodo.msg.trim())
+      this.todosService.addTodo(this.newTodo.msg).subscribe(({ todo }) => {
+        this.todos = [...this.todos, todo];
+        this.newTodo.msg = "";
+      });
+    else this.newTodo.msg = "";
   }
 
   updateTodo(selectedTodo: Todo) {
@@ -45,5 +47,11 @@ export class TodosComponent implements OnInit {
         (singleTodo) => singleTodo._id !== todo._id
       );
     });
+  }
+
+  keyDownResponse(event) {
+    if (event.keyCode === 13) {
+      this.addTodo();
+    }
   }
 }

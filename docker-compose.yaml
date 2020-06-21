@@ -1,6 +1,17 @@
 version: "3.8"
 
 services:
+  web:
+    build: .
+    container_name: angular-todo
+    ports:
+      - 5000:5000
+    environment:
+      - MONGO_URI=mongodb://db:27017/todoList
+      - JWT_SECRET=OMGW!!@T@$ecret
+      - NODE_ENV=production
+    depends_on:
+      - db
   db:
     image: mongo:4.2-bionic
     container_name: todo-db

@@ -16,7 +16,8 @@
     "server:dev": "node server/dist/server.js",
     "server:prod": "NODE_ENV=production node server/dist/server.js",
     "dev": "concurrently \"yarn server\" \"yarn client:dev\"",
-    "client:dev": "cd client && yarn start"
+    "client:dev": "cd client && yarn start",
+    "client:build": "cd client && yarn build"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",

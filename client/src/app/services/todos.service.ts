@@ -32,7 +32,7 @@ export class TodosService {
     return this.http.put<{ todo: Todo }>(
       "/api/todo",
       {
-        todo,
+        _id: todo._id,
       },
       httpOptions
     );
@@ -41,7 +41,7 @@ export class TodosService {
   deleteTodo(todo: Todo) {
     return this.http.post<{ todo: Todo }>(
       "/api/todo/delete",
-      { todo },
+      { _id: todo._id },
       httpOptions
     );
   }
