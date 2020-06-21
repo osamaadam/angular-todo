@@ -1,0 +1,27 @@
+<form class="card login-container" (submit)="login(email, password)">
+  <div class="input-container">
+    <label for="user-email">Email</label>
+    <input
+      [(ngModel)]="email"
+      type="email"
+      name="user-email"
+      id="user-email"
+      placeholder="example@domain.com"
+    />
+  </div>
+  <div class="input-container">
+    <label for="user-password">Password</label>
+    <input
+      [(ngModel)]="password"
+      type="password"
+      name="user-password"
+      id="user-password"
+      placeholder="******"
+    />
+  </div>
+  <div class="input-container">
+    <button type="submit" class="button">
+      Login
+    </button>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+<div>
+  <app-navbar [user]="user"></app-navbar>
+  <div class="layout-container">
+    <router-outlet (activate)="changeUser($event)"> </router-outlet>
+  </div>
+</div>

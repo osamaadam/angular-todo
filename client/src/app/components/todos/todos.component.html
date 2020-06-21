@@ -1,0 +1,9 @@
+<div>
+  <input type="text" name="input-todo" [(ngModel)]="newTodo.msg" />
+  <button type="submit" class="button" (click)="addTodo()">add</button>
+  <ul *ngIf="todos">
+    <li *ngFor="let todo of todos" (click)="updateTodo(todo)">
+      {{ todo.msg }}
+    </li>
+  </ul>
+</div>

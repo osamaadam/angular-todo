@@ -1,0 +1,245 @@
+html {
+  --highlightColor: #ffc107;
+  --highlightColorComplement: #003ef8;
+  --backgroundColor: #303030;
+  --paperBackground: #424242;
+  --primaryColor: #fff;
+  --secondaryColor: rgba(255, 255, 255, 0.7);
+  --disabled: rgba(255, 255, 255, 0.5);
+  --hover: rgba(255, 255, 255, 0.08);
+  --success: #4caf50;
+  --error: #f44336;
+}
+
+html[data-theme="light"] {
+  --backgroundColor: #eee;
+  --paperBackground: #fafafa;
+  --primaryColor: rgba(0, 0, 0, 0.87);
+  --highlightColor: #098203;
+  --highlightColorComplement: #f67dfc;
+}
+
+$maxWidth: 800px;
+
+$regular: 400;
+$medium: 500;
+$bold: 700;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  background-color: var(--highlightColor);
+  color: var(--backgroundColor);
+}
+
+a {
+  color: var(--highlightColor);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+p {
+  line-height: 1.45em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--highlightColor);
+}
+
+h4 {
+  text-transform: uppercase;
+  padding-bottom: 0.2em;
+}
+
+body {
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+  font-family: "Montserrat", sans-serif;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  background-color: #fafafa;
+  border-width: 0;
+  padding: 1em;
+  border-radius: 0.5em;
+  border: 2px solid var(--primaryColor);
+  transition-property: border-color;
+  transition-duration: 250ms;
+  &:focus {
+    border-color: var(--highlightColor);
+    outline: none;
+  }
+}
+.card {
+  background-color: var(--paperBackground);
+  border-radius: 1em;
+  margin: 0.5em;
+  padding: 1.5em;
+  min-width: 280px;
+  box-shadow: 0 6px 6px -6px black;
+  width: 95vw;
+}
+
+.button {
+  border: 0;
+  min-width: max-content;
+  padding: 0.5em 1em;
+  background-color: var(--highlightColor);
+  color: var(--backgroundColor);
+  font-size: 1.1em;
+  font-weight: $medium;
+  border-radius: 4px;
+  transition-property: background-color color;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+  &:hover {
+    background-color: var(--hover);
+    color: var(--highlightColor);
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.button--outline {
+  border: 0;
+  min-width: max-content;
+  padding: 1em;
+  background-color: var(--highlightColor);
+  color: var(--backgroundColor);
+  font-size: 1.1em;
+  font-weight: $medium;
+  transition-property: background-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+  &:hover {
+    background-color: var(--backgroundColor);
+    color: var(--highlightColor);
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--highlightColor);
+  transition: 0.4s;
+  transition-property: background-color;
+  &::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 1.6em;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--paperBackground);
+    transition: 0.4s;
+    transition-property: transform;
+  }
+}
+
+input:checked + .slider {
+  background-color: var(--highlightColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--highlightColor);
+  outline: none;
+}
+
+input:checked + .slider:before {
+  transform: translateX(calc(100%));
+}
+
+.slider.round {
+  border-radius: 34px;
+  &::before {
+    border-radius: 50%;
+  }
+}
+
+.snackbar-container {
+  visibility: hidden;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 30px;
+  &--show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+}
+
+.snackbar {
+  min-width: 30vw;
+  max-width: 50vw;
+  color: #fff;
+  font-weight: $regular;
+  line-height: 1.2em;
+  text-align: center;
+  border-radius: 4px;
+  padding: 1em;
+  z-index: 1;
+}
+
+.success {
+  background-color: var(--success);
+}
+
+.error {
+  background-color: var(--error);
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 10vh;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 10vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

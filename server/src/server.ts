@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user.router";
 import auth from "./middleware/auth.middleware";
 import todoRouter from "./routes/todo.router";
+import path from "path";
 
 require("dotenv").config();
 
@@ -12,7 +13,6 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(auth());
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -27,8 +27,27 @@ connection.once("open", () => {
   console.log("Database connection established successfully!");
 });
 
-app.use("/api/user", userRouter);
-app.use("/api/todo", todoRouter);
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    express.static(path.join(__dirname, "..", "..", "client", "dist", "client"))
+  );
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(
+        __dirname,
+        "..",
+        "..",
+        "client",
+        "dist",
+        "client",
+        "index.html"
+      )
+    );
+  });
+}
+
+app.use("/api/user", auth, userRouter);
+app.use("/api/todo", auth, todoRouter);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

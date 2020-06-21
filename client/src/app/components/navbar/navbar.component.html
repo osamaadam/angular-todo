@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <a routerLink="/" class="navlinks__link navlinks__link--highlighted">Home</a>
+  <div class="navbar__switch-container">
+    <label class="switch">
+      <input
+        type="checkbox"
+        id="theme-toggle"
+        (change)="changeTheme()"
+        [(ngModel)]="theme"
+      />
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <button *ngIf="user" class="button" (click)="logout()">logout</button>
+  <a *ngIf="!user" routerLink="/login" class="button">login</a>
+</nav>

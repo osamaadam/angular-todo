@@ -1,5 +1,10 @@
 import { Router } from "express";
-import Todo from "../models/todo.model";
+import Todo, { TodoType } from "../models/todo.model";
+
+interface Auth {
+  _id: string;
+  iat: number;
+}
 
 const router = Router();
 
@@ -40,6 +45,31 @@ router.post("/add", async (req, res) => {
   const todo = await newTodo.save();
 
   res.json({ todo });
+});
+
+router.put("/", async (req, res) => {
+  const { user, todo }: { user: Auth; todo: TodoType } = req.body;
+
+  if (!user) res.status(401).json("User not logged in!");
+
+  const updatedTodo = await Todo.findOneAndUpdate(
+    { _id: todo._id },
+    {
+      $set: { completed: !todo.completed },
+    }
+  ).exec();
+
+  res.json({ todo: updatedTodo });
+});
+
+router.post("/delete", async (req, res) => {
+  const { user, todo }: { user: Auth; todo: TodoType } = req.body;
+
+  if (!user) res.status(401).json("User not logged in!");
+
+  const deletedTodo = await Todo.findOneAndDelete({ _id: todo._id }).exec();
+
+  res.json({ todo: deletedTodo });
 });
 
 export default router;
