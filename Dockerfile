@@ -14,7 +14,7 @@ RUN yarn client:build && \
   yarn server:build && \
   mv client/dist/client/ server/ && \
   rm -r client && \
-  yarn
+  yarn --prod
 
 FROM node:12-alpine
 
