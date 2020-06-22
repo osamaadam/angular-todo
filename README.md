@@ -17,12 +17,16 @@ MONGO_URI=<Your MongDB server URI>
 JWT_SECRET=<Any arbitrary secret>
 ```
 
-You may also use docker-compose without any extra setup but this will run the production environment not the development environment. Thus, your changes will not be reflected in the container state.
+If that's too much setup, you may use the docker enviroment if you have Docker, and docker-compose installed on your system.
+
+To run the development environment:
+
+```sh
+-$ yarn docker:dev
+```
 
 To run the production environment:
 
 ```sh
--$ docker-compose up
+-$ yarn docker:prod
 ```
-
-This will automatically install all the necessary dependencies and run all the necessary servers.

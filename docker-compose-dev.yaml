@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  web-dev:
+    build:
+      dockerfile: Dockerfile-dev
+      context: .
+    container_name: angular-todo-dev
+    ports:
+      - 4200:4200
+      - 5000:5000
+    environment:
+      - MONGO_URI=mongodb://db-dev:27017/todoList
+      - JWT_SECRET=OMGW!!@T@$ecret
+    volumes:
+      - .:/app/
+    depends_on:
+      - db-dev
+    command: ["yarn", "dev"]
+  db-dev:
+    image: mongo:4.2-bionic
+    ports:
+      - 27017:27017

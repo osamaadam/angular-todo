@@ -17,7 +17,9 @@
     "server:prod": "NODE_ENV=production node server/dist/server.js",
     "dev": "concurrently \"yarn server\" \"yarn client:dev\"",
     "client:dev": "cd client && yarn start",
-    "client:build": "cd client && ng build --prod"
+    "client:build": "cd client && ng build --prod",
+    "docker:prod": "docker-compose -f docker-compose-prod.yaml up",
+    "docker:dev": "docker-compose -f docker-compose-dev.yaml up"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
