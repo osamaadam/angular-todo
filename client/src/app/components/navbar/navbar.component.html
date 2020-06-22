@@ -2,6 +2,13 @@
   <div *ngIf="user" class="navlinks__link navlinks__link--highlighted">
     {{ user.username }}
   </div>
+  <a
+    routerLink="register"
+    *ngIf="!user"
+    class="navlinks__link navlinks__link--highlighted"
+  >
+    Register
+  </a>
   <div class="navbar__switch-container">
     <label class="switch">
       <input
@@ -13,6 +20,6 @@
       <span class="slider round"></span>
     </label>
   </div>
-  <button *ngIf="user" class="button" (click)="logout()">logout</button>
-  <a *ngIf="!user && !isLoginPage" routerLink="/login" class="button">login</a>
+  <button *ngIf="user" class="button" (click)="logout()">Logout</button>
+  <a *ngIf="!user && !isLoginPage" routerLink="/login" class="button">Login</a>
 </nav>

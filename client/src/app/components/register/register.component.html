@@ -1,4 +1,18 @@
-<form class="card login-container" (submit)="login(email, password)">
+<form
+  class="card login-container"
+  (submit)="register(email, password, username)"
+>
+  <div class="input-container">
+    <label for="user-username">Username</label>
+    <input
+      [(ngModel)]="username"
+      label="Username"
+      type="text"
+      name="user-username"
+      id="user-username"
+      placeholder="Marie Antoinette"
+    />
+  </div>
   <div class="input-container">
     <label for="user-email">Email</label>
     <input
